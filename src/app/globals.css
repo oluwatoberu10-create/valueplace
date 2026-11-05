@@ -1,0 +1,225 @@
+@import "tailwindcss";
+
+@theme {
+  --color-wine-900: #3f0b16;
+  --color-wine-800: #561220;
+  --color-wine-700: #741b2d;
+  --color-cream: #f6eedf;
+  --color-paper: #fffbf2;
+  --color-ink: #241a18;
+  --color-ink-soft: #5e4f47;
+  --color-gold: #d0a557;
+  --color-gold-deep: #80591a;
+  --color-error: #a51d1d;
+  --color-whatsapp: #128c4f;
+
+  --font-display: var(--font-gloock), Georgia, serif;
+  --font-sans: var(--font-instrument), "Segoe UI", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold-deep);
+  outline-offset: 2px;
+}
+
+@layer components {
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s, transform 0.15s;
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+  .btn-primary {
+    background: var(--color-wine-800);
+    color: var(--color-cream);
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--color-wine-700);
+  }
+  .btn-gold {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+  .btn-gold:hover {
+    background: #dcb56b;
+  }
+  .btn-ghost {
+    background: transparent;
+    border-color: color-mix(in srgb, var(--color-wine-800) 35%, transparent);
+    color: var(--color-wine-800);
+  }
+  .btn-ghost:hover {
+    border-color: var(--color-wine-800);
+  }
+  .btn-outline-light {
+    border-color: color-mix(in srgb, var(--color-cream) 55%, transparent);
+    color: var(--color-cream);
+  }
+  .btn-outline-light:hover {
+    background: var(--color-cream);
+    color: var(--color-wine-900);
+  }
+  .btn-added {
+    background: var(--color-gold-deep);
+    color: var(--color-paper);
+  }
+  .btn-whatsapp {
+    background: var(--color-whatsapp);
+    color: #fff;
+  }
+  .btn-whatsapp:hover {
+    background: #0e7641;
+  }
+
+  .field {
+    min-height: 3rem;
+    padding: 0.625rem 0.875rem;
+    background: var(--color-paper);
+    border: 1px solid color-mix(in srgb, var(--color-wine-800) 30%, transparent);
+    border-radius: 2px;
+    font-size: 1rem; /* 16px stops iOS zooming in on focus */
+  }
+  .field:focus {
+    border-color: var(--color-wine-800);
+    outline: 2px solid color-mix(in srgb, var(--color-gold-deep) 55%, transparent);
+    outline-offset: 0;
+  }
+  .field[aria-invalid="true"] {
+    border-color: var(--color-error);
+  }
+
+  .nav-link {
+    position: relative;
+    padding: 0.25rem 0;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 2px;
+    background: var(--color-gold-deep);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s;
+  }
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  .skip-link {
+    position: absolute;
+    left: -999px;
+    z-index: 50;
+    padding: 0.75rem 1rem;
+    background: var(--color-wine-800);
+    color: var(--color-cream);
+  }
+  .skip-link:focus {
+    left: 0.5rem;
+    top: 0.5rem;
+  }
+
+  /* The vertical stripes of the Value Plus Place building. */
+  .stripe-band {
+    background: repeating-linear-gradient(
+      90deg,
+      var(--color-wine-800) 0 34px,
+      var(--color-cream) 34px 46px,
+      var(--color-gold) 46px 48px,
+      var(--color-cream) 48px 60px
+    );
+  }
+  .facade {
+    background-color: var(--color-wine-900);
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0 72px,
+      color-mix(in srgb, var(--color-wine-700) 45%, transparent) 72px 108px
+    );
+  }
+  .facade-soft {
+    background-color: var(--color-cream);
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0 18px,
+      color-mix(in srgb, var(--color-wine-800) 12%, transparent) 18px 28px
+    );
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* One orchestrated entrance on the hero, nothing scattered down the page. */
+  .rise {
+    animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: var(--d, 0s);
+  }
+
+  .cart-drawer[open] {
+    animation: slide-in 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+  }
+}
